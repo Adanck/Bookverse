@@ -75,7 +75,7 @@ This project is deployable as:
 ## 👨‍💻 Author
 
 **Adan Talavera**  
-📧 [tu-email-opcional@example.com]  
+📧 [adantalavera94@gmail.com]  
 💼 [LinkedIn] | 💻 [Portfolio (en progreso)]  
 
 ---
