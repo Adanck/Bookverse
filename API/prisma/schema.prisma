@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(cuid())
+  name      String?
+  email     String     @unique
+  password  String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  userBooks UserBook[]
+  reviews   Review[]
+  comments  Comment[]
+  lists     List[]
+}
+
+model Book {
+  id          String     @id @default(cuid())
+  googleId    String?    @unique
+  title       String
+  authors     String?
+  description String?
+  thumbnail   String?
+  pageCount   Int?
+  publishedAt DateTime?
+
+  userBooks UserBook[]
+  reviews   Review[]
+  comments  Comment[]
+}
+
+model UserBook {
+  id         String   @id @default(cuid())
+  userId     String
+  bookId     String
+  status     String   // reading, read, to-read
+  rating     Int?
+  notes      String?
+  startedAt  DateTime?
+  finishedAt DateTime?
+  pagesRead  Int?
+
+  user   User @relation(fields: [userId], references: [id])
+  book   Book @relation(fields: [bookId], references: [id])
+
+  listItems ListItem[]
+  reviews   Review[]
+
+  @@unique([userId, bookId]) // evita duplicados
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  userBookId String
+  content    String
+  rating     Int
+  createdAt  DateTime @default(now())
+
+  userBook UserBook @relation(fields: [userBookId], references: [id])
+  user     User      @relation(fields: [userId], references: [id])
+  book     Book      @relation(fields: [bookId], references: [id])
+
+  userId String
+  bookId String
+}
+
+model Comment {
+  id         String   @id @default(cuid())
+  userId     String
+  bookId     String
+  content    String
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+  book Book @relation(fields: [bookId], references: [id])
+}
+
+model List {
+  id        String     @id @default(cuid())
+  title     String
+  userId    String
+  createdAt DateTime   @default(now())
+
+  user      User       @relation(fields: [userId], references: [id])
+  listItems ListItem[]
+}
+
+model ListItem {
+  id         String     @id @default(cuid())
+  listId     String
+  userBookId String
+
+  list      List       @relation(fields: [listId], references: [id])
+  userBook  UserBook   @relation(fields: [userBookId], references: [id])
+
+  @@unique([listId, userBookId]) // evita duplicados
+}
