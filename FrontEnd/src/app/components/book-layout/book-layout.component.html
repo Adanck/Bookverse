@@ -1,0 +1,27 @@
+<ion-content class="book-layout">
+  <div class="container">
+    <!-- Menú lateral -->
+    <div class="sidebar">
+     <app-book-list
+  [lists]="bookLists"
+  [selectedList]="selectedList"
+  (listSelected)="selectList($event)">
+</app-book-list>
+
+
+    </div>
+
+    <!-- Área principal -->
+    <div class="main">
+      <h2 class="title">Top Books</h2>
+      <p *ngIf="selectedBook">{{ selectedBook.title }}</p>
+    </div>
+
+    <!-- Área de capítulos -->
+    <div class="chapters">
+      <h2 class="title">Chapters</h2>
+      <app-book-chapters *ngIf="selectedBook" [chapters]="selectedBook.chapters">
+      </app-book-chapters>
+    </div>
+  </div>
+</ion-content>

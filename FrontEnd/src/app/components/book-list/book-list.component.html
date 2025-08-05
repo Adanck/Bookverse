@@ -1,0 +1,6 @@
+<div class="list-wrapper">
+  <h3 class="title">Book Lists</h3>
+  <ul>
+    <li *ngFor="let list of lists" [class.selected]="list.name === selectedList?.name" (click)="selectList(list)">
+  </ul>
+</div>
