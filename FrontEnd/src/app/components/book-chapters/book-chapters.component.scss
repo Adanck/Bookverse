@@ -1,0 +1,11 @@
+.chapters {
+  margin: 0; padding-left: 0; display: grid; gap: 8px;
+  li {
+    list-style: none; display: flex; gap: 8px; align-items: center;
+    padding: 8px 10px; border-radius: 10px;
+    background: color-mix(in oklab, var(--brand-bg) 84%, black);
+    border: 1px solid color-mix(in oklab, var(--brand-primary) 12%, transparent);
+    .idx { opacity: .7; width: 18px; text-align: right; }
+    .name { flex: 1; }
+  }
+}

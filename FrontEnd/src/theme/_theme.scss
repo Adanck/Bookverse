@@ -1,0 +1,73 @@
+/* Paletas base (puedes ajustar hex a gusto) */
+:root, :host {
+  /* fallback (mismo que 'mint' por si no hay data-theme) */
+  --brand-bg: #0e100f;
+  --brand-surface: rgba(16,18,18,.5);
+  --brand-primary: #22f2b0;
+  --brand-primary-contrast: #0a0b0b;
+  --brand-accent: #24d69a;
+  --brand-ring: rgba(34,242,176,.5);
+}
+
+/* Tema Mint (oscuro con glass verdoso) */
+:root[data-theme="mint"] {
+  --ion-background-color: #0e100f;
+  --ion-text-color: #eafff6;
+
+  --ion-color-primary: #22f2b0;
+  --ion-color-primary-contrast: #08100d;
+  --ion-color-secondary: #1db48a;
+  --ion-color-tertiary: #5ef6cf;
+
+  --brand-bg: #0e100f;
+  --brand-surface: rgba(16,18,18,.5);
+  --brand-primary: #22f2b0;
+  --brand-primary-contrast: #08100d;
+  --brand-accent: #24d69a;
+  --brand-ring: rgba(34,242,176,.5);
+}
+
+/* Tema Moss (verde musgo, oscuro pero no tanto) */
+:root[data-theme="moss"] {
+  --ion-background-color: #121612;
+  --ion-text-color: #e7f2e7;
+
+  --ion-color-primary: #88c07a;
+  --ion-color-primary-contrast: #0e140f;
+  --ion-color-secondary: #5c8e51;
+  --ion-color-tertiary: #a5d595;
+
+  --brand-bg: #141914;
+  --brand-surface: rgba(18,22,18,.55);
+  --brand-primary: #88c07a;
+  --brand-primary-contrast: #0e140f;
+  --brand-accent: #6aa45f;
+  --brand-ring: rgba(136,192,122,.45);
+}
+
+/* Tema Azure (azulado) */
+:root[data-theme="azure"] {
+  --ion-background-color: #0b0f13;
+  --ion-text-color: #e9f4ff;
+
+  --ion-color-primary: #5ab1ff;
+  --ion-color-primary-contrast: #071018;
+  --ion-color-secondary: #3f86d1;
+  --ion-color-tertiary: #9bd0ff;
+
+  --brand-bg: #0b0f13;
+  --brand-surface: rgba(12,16,22,.55);
+  --brand-primary: #5ab1ff;
+  --brand-primary-contrast: #071018;
+  --brand-accent: #3f86d1;
+  --brand-ring: rgba(90,177,255,.45);
+}
+
+/* Utilidades de “glass” compartidas */
+.glass {
+  background: var(--brand-surface);
+  border: 1px solid color-mix(in oklab, var(--brand-primary) 18%, transparent);
+  border-radius: 14px;
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+}

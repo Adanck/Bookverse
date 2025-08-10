@@ -1,15 +1,9 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
-/* Core CSS required for Ionic components to work properly */
+/* Core CSS required for Ionic components */
 @import "@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
@@ -18,20 +12,72 @@
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
 
-/* Optional CSS utils that can be commented out */
+/* Optional CSS utils */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+/* Dark mode sensible por sistema (puede convivir con nuestros temas) */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/* ====== NUESTROS TEMAS ====== */
+@import './theme/theme.scss';
+
+/* ====== Ajustes globales que usan las variables del tema ====== */
+
+/* Usamos esquema dark por defecto (los 3 temas son oscuros).
+   Si luego haces un tema claro, quita esto o cámbialo dinámicamente. */
+:root, :host {
+  color-scheme: dark;
+}
+
+/* Fondo y texto globales según el tema activo */
+ion-content {
+  --background: var(--ion-background-color);
+  color: var(--ion-text-color);
+}
+
+/* Toolbar con un borde sutil y “glass” leve */
+ion-toolbar {
+  --background: color-mix(in oklab, var(--brand-bg) 88%, black);
+  --color: var(--ion-text-color);
+  border-bottom: 1px solid color-mix(in oklab, var(--brand-primary) 14%, transparent);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+}
+
+/* Tarjetas / contenedores de vidrio reutilizables */
+.glass {
+  background: var(--brand-surface);
+  border: 1px solid color-mix(in oklab, var(--brand-primary) 18%, transparent);
+  border-radius: 14px;
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+}
+
+/* Botones con foco/hover más visibles según el tema */
+ion-button {
+  --border-radius: 12px;
+  &:focus-visible {
+    outline: 2px solid var(--brand-ring);
+    outline-offset: 2px;
+  }
+}
+
+/* Pequeño helper para títulos de sección */
+.section-title {
+  color: var(--ion-text-color);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* Scrollbars discretos (Chromium) */
+*::-webkit-scrollbar {
+  height: 10px; width: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--brand-primary) 24%, transparent);
+  border-radius: 10px;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-books',
@@ -26,7 +27,8 @@ export class BooksPage implements OnInit {
     }
   ];
 
-  constructor() {}
+  constructor(private theme: ThemeService) {}
 
+   cycleTheme() { this.theme.cycle(); }
   ngOnInit() {}
 }

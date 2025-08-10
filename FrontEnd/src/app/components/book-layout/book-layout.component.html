@@ -1,27 +1,58 @@
-<ion-content class="book-layout">
-  <div class="container">
-    <!-- Menú lateral -->
-    <div class="sidebar">
-     <app-book-list
-  [lists]="bookLists"
-  [selectedList]="selectedList"
-  (listSelected)="selectList($event)">
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar glass">
+    <div class="sidebar-header">
+      <h2 class="section-title">Book Lists</h2>
+    </div>
+    <app-book-list
+  [lists]="listHeaders"
+  [selectedList]="selectedList.name"
+  (listSelected)="onListSelected($event)">
 </app-book-list>
+  </aside>
 
-
+  <!-- Main books area -->
+  <main class="main glass">
+    <div class="main-header">
+      <h2 class="section-title">Top Books</h2>
     </div>
 
-    <!-- Área principal -->
-    <div class="main">
-      <h2 class="title">Top Books</h2>
-      <p *ngIf="selectedBook">{{ selectedBook.title }}</p>
+    <div class="books-grid">
+      <button
+        class="book-card"
+        *ngFor="let b of selectedList.books"
+        (click)="onPickBook(b)"
+        [class.active]="b?.id === selectedBook.id">
+        <div class="cover">
+          <img [src]="b.cover || ''" [alt]="b.title" loading="lazy">
+        </div>
+        <div class="meta">
+          <div class="title">{{ b.title }}</div>
+          <div class="author">{{ b.author }}</div>
+          <div class="chips">
+            <ion-chip size="small" color="medium" outline>{{ b.chapters.length }} chapters</ion-chip>
+          </div>
+        </div>
+      </button>
+
+      <div *ngIf="!selectedList.books?.length" class="empty">
+        <ion-icon name="library-outline"></ion-icon>
+        <p>No books in this list yet.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Chapters -->
+  <section class="chapters glass">
+    <div class="chapters-header">
+      <h2 class="section-title">Chapters</h2>
+      <div class="subtitle" *ngIf="selectedBook?.title">
+        {{ selectedBook.title }} · <span>{{ selectedBook.author }}</span>
+      </div>
     </div>
 
-    <!-- Área de capítulos -->
-    <div class="chapters">
-      <h2 class="title">Chapters</h2>
-      <app-book-chapters *ngIf="selectedBook" [chapters]="selectedBook.chapters">
-      </app-book-chapters>
-    </div>
-  </div>
-</ion-content>
+    <app-book-chapters
+      [chapters]="selectedBook.chapters || []">
+    </app-book-chapters>
+  </section>
+</div>

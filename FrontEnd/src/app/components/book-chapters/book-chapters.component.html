@@ -1,5 +1,6 @@
-<ul>
-  <li *ngFor="let chapter of chapters">
-    {{ chapter }}
+<ol class="chapters">
+  <li *ngFor="let c of chapters; index as i">
+    <span class="idx">{{ i + 1 }}.</span>
+    <span class="name">{{ c }}</span>
   </li>
-</ul>
+</ol>
